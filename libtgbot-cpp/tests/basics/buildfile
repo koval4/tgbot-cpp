@@ -1,0 +1,3 @@
+import libs = libtgbot-cpp%lib{tgbot-cpp}
+
+exe{driver}: {hxx cxx}{**} $libs testscript{**}

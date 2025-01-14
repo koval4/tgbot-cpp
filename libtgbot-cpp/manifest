@@ -1,0 +1,15 @@
+: 1
+name: libtgbot-cpp
+version: 1.8.0-a.0.z
+language: c++
+project: tgbot-cpp
+summary: C++ library for Telegram bot API.
+license: MIT ; MIT License.
+description-file: README.md
+package-description-file: PACKAGE-README.md
+url: https://github.com/reo7sp/tgbot-cpp
+email: upstream@example.org
+package-url: https://github.com/koval4/tgbot-cpp
+package-email: roman.kovalivskiy@gmail.com ; Mailing list.
+depends: * build2 >= 0.16.0
+depends: * bpkg >= 0.16.0

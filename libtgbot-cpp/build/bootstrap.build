@@ -1,0 +1,7 @@
+project = libtgbot-cpp
+
+using version
+using config
+using test
+using install
+using dist
