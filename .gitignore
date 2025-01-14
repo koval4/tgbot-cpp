@@ -3,3 +3,4 @@
 # Local default options files.
 #
 .build2/local/
+*.~undo-tree~
