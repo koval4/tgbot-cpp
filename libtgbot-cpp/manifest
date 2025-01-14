@@ -13,3 +13,9 @@ package-url: https://github.com/koval4/tgbot-cpp
 package-email: roman.kovalivskiy@gmail.com ; Mailing list.
 depends: * build2 >= 0.16.0
 depends: * bpkg >= 0.16.0
+depends: libboost-asio ^1.85.0
+depends: libboost-variant ^1.85.0
+depends: libboost-property-tree ^1.85.0
+depends: libboost-lexical-cast ^1.85.0
+depends: libz ^1.2.12
+depends: libssl ^3.3.1
