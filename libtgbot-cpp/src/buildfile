@@ -1,6 +1,11 @@
 intf_libs = # Interface dependencies.
 impl_libs = # Implementation dependencies.
-#import xxxx_libs += libhello%lib{hello}
+import intf_libs += libboost-asio%lib{boost_asio}
+import intf_libs += libboost-variant%lib{boost_variant}
+import intf_libs += libboost-property-tree%lib{boost_property_tree}
+import intf_libs += libboost-lexical-cast%lib{boost_lexical_cast}
+import impl_libs += libz%lib{z}
+import impl_libs += libssl%lib{ssl}
 
 # Public headers.
 #
@@ -18,22 +23,29 @@ lib{tgbot-cpp}: {hxx cxx}{**} $impl_libs $intf_libs
 
 # Build options.
 #
-out_pfx_inc = [dir_path] $out_root/include/
 src_pfx_inc = [dir_path] $src_root/include/
-out_pfx_src = [dir_path] $out_root/src/
 src_pfx_src = [dir_path] $src_root/src/
 
-cxx.poptions =+ "-I$out_pfx_src" "-I$src_pfx_src" \
-                "-I$out_pfx_inc" "-I$src_pfx_inc"
+cxx.poptions =+ "-I$src_pfx_src" "-I$src_pfx_inc"
 
 #obja{*}: cxx.poptions += -DTGBOT_STATIC_BUILD
-#objs{*}: cxx.poptions += -DTGBOT_SHARED_BUILD
+objs{*}: cxx.poptions += -DTGBOT_DLL
+
+switch $cxx.target.class, $cxx.target.system
+{
+  case 'windows', 'mingw32'
+    cxx.libs += -lws2_32
+  case 'windows'
+    cxx.libs += ws2_32.lib
+  default
+    cxx.libs += -pthread
+}
 
 # Export options.
 #
 lib{tgbot-cpp}:
 {
-  cxx.export.poptions = "-I$out_pfx_inc" "-I$src_pfx_inc"
+  cxx.export.poptions = "-I$src_pfx_inc"
   cxx.export.libs = $intf_libs
 }
 
